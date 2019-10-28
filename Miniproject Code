@@ -1,0 +1,150 @@
+var mySound;
+
+function preload() {
+  mySound = loadSound("wolf.wav");
+}
+
+
+  function setup() {
+    createCanvas(400, 400);
+  }
+
+  var sunx = 70;
+  var sunxspeed = 5;
+  var moonx = -50
+  var isMoving = 0;
+  var start1 = -60
+  var start2 = -100
+  var start3 = -140
+  var state = 0
+  var r = 0
+
+  function mousePressed() {
+    if (isMoving == 0) {
+      isMoving = 1;
+    } else {
+      isMoving = 0;
+    }
+  }
+
+  function draw() {
+    background(30, 150, 255);
+
+
+    if (isMoving == 1) {
+ 
+      //when moon is going off the pages
+      if (state == 0) {
+        sunx = sunx + 3;
+
+        // start2=start2+4;
+        // start3=start3+3;
+        if (sunx >= 400) {
+          sunx = -50;
+          state = 1;
+        }
+      }
+      //when sun is moving off the page
+      if (state == 1) {
+      mySound.play();
+        moonx = moonx + 3;
+        start1 = start1 + 3;
+        start2 = start2 + 3;
+        start3 = start3 + 4;
+
+        r += 0.05
+
+        if (moonx >= 400) {
+          moonx = -50;
+          state = 0;
+          start1 = -60
+          start2 = -100
+          start3 = -140
+        }
+      }
+    }
+
+
+
+    fill(255, 218, 30);
+    arc(moonx, 50, 80, 80, 26, PI + QUARTER_PI, CHORD);
+
+    fill(255, 38, 30);
+    ellipse(sunx, 50, 80, 80);
+
+    noStroke();
+    fill(58, 117, 30);
+    triangle(300, 400, 450, 400, 350, 180);
+    fill(63, 128, 41);
+    triangle(-20, 400, 150, 400, 80, 200);
+    fill(52, 105, 27);
+    triangle(100, 400, 250, 400, 180, 150);
+    fill(43, 87, 22);
+    triangle(200, 400, 350, 400, 280, 280);
+
+    // fill(255, 240, 30);
+    // noStroke();
+    // beginShape();
+    // vertex(300, 100);
+    // vertex(320, 80);
+    // vertex(300, 60);
+    // vertex(280, 80);
+    // endShape();
+
+
+    // fill(255, 240, 30);
+    // noStroke();
+    // beginShape();
+    // vertex(180, 37);
+    // vertex(195, 20);
+    // vertex(180, 5);
+    // vertex(165, 20);
+    // endShape();
+
+    //   fill(255, 240, 30);
+    // noStroke();
+    // beginShape();
+    // vertex(215, 137);
+    // vertex(230, 120);
+    // vertex(215, 105);
+    // vertex(200, 120);
+    // endShape();
+
+
+    fill(255, 240, 30);
+    noStroke();
+    push();
+    translate(start1, 180);
+    rotate(r)
+    rect(-10, -10, 20, 20);
+    pop();
+
+    push();
+    translate(start2, 120);
+    rotate(r)
+    rect(-12.5, -12.5, 12.5, 12.5);
+    pop();
+
+    push();
+    // forget all the operation before
+
+    translate(start3, 180); //where the position starts
+    rotate(r)
+
+    rect(-15, -15, 30, 30); //what to draw on every frame
+
+
+    // starts all the operation before push again
+    pop();
+
+    // translate(0);
+    // translate(start2, 80);
+    // rotate()
+    // rect(-10, -10, 20, 20);
+    // translate(start2, 80);
+    // rect(-10, -10, 20, 20);
+    // rect(start1, 180, 20, 20);
+    // rect(start2, 80, 30, 30);
+    // rect(start3, 120, 25, 25);
+  }
+//}
